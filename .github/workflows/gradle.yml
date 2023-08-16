@@ -12,8 +12,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # env:
-    #   working-directory: ./github-action
+    env:
+      working-directory: ./github-action
 
     steps:
     - name: checkout
@@ -29,17 +29,27 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
-      
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-      with:
-        arguments: build
-        build-root-directory: ./
+    - name: Gradle wrapper & build
+      working-directory: ${{ env.working-directory }}
+      run: |
+        chmod +x ./gradlew
+        ./gradlew clean bootJar
+        ls ./build/libs
         
-    - uses: actions/upload-artifact@v3
+    - name: Upload to Oracle Cloud
+      uses: actions/upload-artifact@v3
       with:
-        name: Package
+        name: jar-artifact
+        run : pwd
         path: build/libs
 
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:        
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: jar-artifact
+          
