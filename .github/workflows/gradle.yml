@@ -40,7 +40,7 @@ jobs:
       with:
         host: ${{ secrets.SSH_IP }}
         port: 22
-        username: pinner
+        username: ubuntu
         password: ${{ secrets.SSH_PASSWORD }}
         key: ${{ secrets.SSH_RSA }}
         script: |
