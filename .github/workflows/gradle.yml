@@ -1,3 +1,7 @@
+ubuntu 서버를 사용하고 있는데
+.jar파일을 /home/ubuntu/app/pinner_dev로 전송하고 싶
+
+
 name: Java CI with Gradle
 
 on:
@@ -41,15 +45,28 @@ jobs:
       with:
         name: jar-artifact
         run : pwd
-        path: github-action/build/libs
+        path: github-action/build/libs #Full Path
 
   
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     steps:        
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: jar-artifact
           
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_IP }}
+        port: 22
+        username: ubuntu
+        password: ${{ secrets.SSH_PASSWORD }}
+        key: ${{ secrets.SSH_RSA }}
+        script: |
+          cd /home/ubuntu/app/pinner_dev/pinner_be       # 원격 서버 디렉토리로 이동
+          put ./jar-artifact/ .  # 로컬의 아티팩트를 원격 서버로 업로드
