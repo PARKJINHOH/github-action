@@ -61,5 +61,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         key: ${{ secrets.SSH_RSA }}
-        source: ./build/libs/*
-        target: /home/ubuntu/app/pinner_dev/pinner_be
+        source: build/libs/*
+        target: ${{ secrets.DIST_PATH }}
