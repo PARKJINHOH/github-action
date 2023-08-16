@@ -33,7 +33,7 @@ jobs:
       working-directory: ${{ env.working-directory }}
       run: |
         chmod +x ./gradlew
-        ./gradlew clean buildJar
+        ./gradlew clean bootJar
         
     - name: Upload to Oracle Cloud
       uses: actions/upload-artifact@v2
