@@ -26,9 +26,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    
-    # - name: Build with Gradle
-    #   run: ./gradlew build
 
-    # - name: Deploy to production
-    #   run: ./gradlew deploy
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
