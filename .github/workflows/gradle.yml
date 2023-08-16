@@ -61,5 +61,5 @@ jobs:
         username: ubuntu
         password: ${{ secrets.SSH_PASSWORD }}
         key: ${{ secrets.SSH_RSA }}
-        source: github-action/build/libs/*
+        source: build/libs/*
         target: /home/ubuntu/app/pinner_dev/pinner_be
