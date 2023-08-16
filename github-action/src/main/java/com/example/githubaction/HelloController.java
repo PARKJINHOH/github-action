@@ -9,12 +9,17 @@ public class HelloController {
 
 
     @GetMapping
-    public String Hello(){
+    public String Hello() {
         return "Hello Controller";
     }
 
     @GetMapping("/test")
-    public String Test(){
+    public String Test() {
         return "Hello Controller : Test Method";
+    }
+
+    @GetMapping("cache")
+    public String CacheTest() {
+        return "Hello Controller : CacheTest";
     }
 }
