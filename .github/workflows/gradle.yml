@@ -40,7 +40,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
-        run : pwd
         path: github-action/build/libs #Full Path
 
   
@@ -65,4 +64,5 @@ jobs:
         key: ${{ secrets.SSH_RSA }}
         script: |
           cd /home/ubuntu/app/pinner_dev/pinner_be       # 원격 서버 디렉토리로 이동
-          put ./jar-artifact/ .  # 로컬의 아티팩트를 원격 서버로 업로드
+          mkdir -p target/
+          mv target/github-action-0.0.1-SNAPSHOT.jar target/pinner.jar    # .jar 파일 이름 변경
