@@ -62,7 +62,6 @@ jobs:
         username: ubuntu
         password: ${{ secrets.SSH_PASSWORD }}
         key: ${{ secrets.SSH_RSA }}
-        script: |
-          cd /home/ubuntu/app/pinner_dev/pinner_be       # 원격 서버 디렉토리로 이동
-          mkdir -p target/
-          mv ./ target/    # .jar 파일 이름 변경
+        source: "build/libs/*.jar"
+        target: "/home/ubuntu/app/pinner_dev/pinner_be"
+        rm: true
