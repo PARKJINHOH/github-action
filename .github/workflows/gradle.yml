@@ -36,11 +36,11 @@ jobs:
         ./gradlew clean bootJar
         ls ./build/libs
         
-    # - name: Upload to Oracle Cloud
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: jar-artifact
-    #     path: github-action/build/libs #Full Path
+    - name: Upload to Oracle Cloud
+      uses: actions/upload-artifact@v3
+      with:
+        name: jar-artifact
+        path: github-action/build/libs #Full Path
 
   
   deploy:
@@ -48,10 +48,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:        
-    # - name: Download artifact
-    #   uses: actions/download-artifact@v3
-    #   with:
-    #     name: jar-artifact
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: jar-artifact
         
     - name: pwd
       run: ls -al .
