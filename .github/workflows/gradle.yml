@@ -54,7 +54,7 @@ jobs:
         name: jar-artifact
 
     - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@v0.1.4
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SSH_IP }}
         port: 22
