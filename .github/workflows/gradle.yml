@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Grant execute permission to Gradle wrapper
-      run: chmod +x github-action/gradlew
+      run: chmod +x ./github-action/gradlew
 
     - name: Build with Gradle wrapper
-      run: github-action/gradlew build
+      run: ./github-action/gradlew build
