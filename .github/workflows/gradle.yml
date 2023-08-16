@@ -62,5 +62,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         key: ${{ secrets.SSH_RSA }}
-        source: "build/libs/*.jar"
+        source: "github-action/build/libs" #Full Path
         target: "/home/ubuntu/app/pinner_dev/pinner_be"
