@@ -66,4 +66,3 @@ jobs:
         key: ${{ secrets.SSH_RSA }}
         source: "*.jar"
         target: ${{ secrets.DIST_PATH }}
-        rm : true
