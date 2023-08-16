@@ -27,8 +27,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Grant execute permission to Gradle wrapper
-      run: chmod +x ./github-action/gradlew
+    - name: Validate Gradle wrapper
+      uses: gradle/wrapper-validation-action@1
+      
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@2
+      with:
+        arguments: build
+        build-root-directory: ./github-action
 
-    - name: Build with Gradle wrapper
-      run: ./github-action/gradlew build
+    # - name: Grant execute permission to Gradle wrapper
+    #   run: chmod +x ./github-action/gradlew
+
+    # - name: Build with Gradle wrapper
+    #   run: ./github-action/gradlew build
