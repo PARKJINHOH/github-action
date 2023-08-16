@@ -64,5 +64,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         key: ${{ secrets.SSH_RSA }}
-        source: build/libs/
+        source: "*.jar"
         target: ${{ secrets.DIST_PATH }}
