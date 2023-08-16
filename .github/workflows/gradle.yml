@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
-        path: build/libs/github-action-0.0.1-SNAPSHOT.jar
+        path: ./build/libs/*.jar
 
   
   deploy:
