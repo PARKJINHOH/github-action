@@ -45,3 +45,5 @@ jobs:
         key: ${{ secrets.SSH_RSA }}
         script: |
           echo "Backend 테스트 출력"
+          cd /home/ubuntu/app/pinner_dev/pinner_be
+          mkdir test
