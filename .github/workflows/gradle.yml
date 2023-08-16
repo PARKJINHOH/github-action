@@ -65,4 +65,4 @@ jobs:
         script: |
           cd /home/ubuntu/app/pinner_dev/pinner_be       # 원격 서버 디렉토리로 이동
           mkdir -p target/
-          mv target/github-action-0.0.1-SNAPSHOT.jar target/pinner.jar    # .jar 파일 이름 변경
+          mv ./ target/    # .jar 파일 이름 변경
