@@ -34,3 +34,14 @@ jobs:
       run: |
         chmod +x ./gradlew
         ./gradlew build
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_IP }}
+        port: 22
+        username: pinner
+        password: ${{ secrets.SSH_PASSWORD }}
+        key: ${{ secrets.SSH_RSA }}
+        script: |
+          echo "Backend 테스트 출력"
