@@ -33,17 +33,13 @@ jobs:
       working-directory: ${{ env.working-directory }}
       run: |
         chmod +x ./gradlew
-        ./gradlew clean build
-
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
+        ./gradlew clean buildJar
+        
+    - name: Upload to Oracle Cloud
+      uses: actions/upload-artifact@v2
       with:
-        host: ${{ secrets.SSH_IP }}
-        port: 22
-        username: ubuntu
-        password: ${{ secrets.SSH_PASSWORD }}
-        key: ${{ secrets.SSH_RSA }}
-        script: |
-          echo "Backend 배포 시작"
-          whoami
+        name: jar-artifact
+        path: build/libs/github-action-0.0.1-SNAPSHOT.jar
+
+
           
