@@ -64,4 +64,3 @@ jobs:
         key: ${{ secrets.SSH_RSA }}
         source: "build/libs/*.jar"
         target: "/home/ubuntu/app/pinner_dev/pinner_be"
-        rm: true
