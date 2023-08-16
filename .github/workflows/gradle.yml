@@ -36,7 +36,7 @@ jobs:
       uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
       with:
         arguments: build
-        # build-root-directory: ${{ env.working-directory }}
+        build-root-directory: ./
         
     - uses: actions/upload-artifact@v3
       with:
