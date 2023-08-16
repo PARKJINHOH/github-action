@@ -41,7 +41,7 @@ jobs:
       with:
         name: jar-artifact
         run : pwd
-        path: build/libs
+        path: github-action/build/libs
 
   
   deploy:
