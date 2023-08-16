@@ -33,7 +33,7 @@ jobs:
       working-directory: ${{ env.working-directory }}
       run: |
         chmod +x ./gradlew
-        ./gradlew clean bootJar
+        ./gradlew clean build
         ls ./build/libs
         
     - name: Upload to Oracle Cloud
@@ -42,13 +42,3 @@ jobs:
         name: jar-artifact
         path: build/libs
 
-  
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:        
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: jar-artifact
-          
