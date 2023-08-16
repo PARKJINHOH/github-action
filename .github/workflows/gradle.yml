@@ -36,7 +36,7 @@ jobs:
         ./gradlew clean bootJar
         
     - name: Upload to Oracle Cloud
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
         path: build/libs/github-action-0.0.1-SNAPSHOT.jar
@@ -45,15 +45,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    steps:
-    - name: checkout
-      uses: actions/checkout@v3
-      with:
-        ref: develop
-        repository: PARKJINHOH/github-action
-        token: ${{ secrets.TOKEN_GITHUB }}
+    steps:        
     - name: Download artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
       with:
         name: jar-artifact
           
