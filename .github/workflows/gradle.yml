@@ -1,4 +1,5 @@
 name: Java CI with Gradle
+# https://rhysd.github.io/actionlint/
 
 on:
   push:
@@ -128,8 +129,13 @@ jobs:
     - if: steps.npm-cache.outputs.cache-hit != 'true'
       run: echo 'npm cache missed!'
 
+    - name: Set up Node Version
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
     - name: Install Dependencies
-      run: npm install
+      run: npm ci
 
     - name: Build
       run: npm run build
