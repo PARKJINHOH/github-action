@@ -23,7 +23,8 @@ jobs:
       with:
         ref: develop
         repository: PARKJINHOH/github-action
-
+        token: ${{ secrets.TOKEN_GITHUB }}
+        
     - name : Run Paths Filter
       uses: dorny/paths-filter@v2
       id: filter
