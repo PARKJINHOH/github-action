@@ -1,5 +1,4 @@
-name: Java CI with Gradle
-# https://rhysd.github.io/actionlint/
+name: Project CI/CD
 
 on:
   push:
@@ -89,8 +88,8 @@ jobs:
       with:
         name: jar-artifact
         
-    - name: pwd
-      run: ls -al .
+    #- name: pwd
+    #  run: ls -al .
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
@@ -101,11 +100,11 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         source: "*.jar"
-        target: ${{ secrets.DIST_PATH }}
+        target: ${{ secrets.DIST_PATH_BACKEND }}
 
   frontend:
     needs: changes
-    # if: ${{ needs.changes.outputs.frontend == 'true' }}
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-latest
     env:
       working-directory: ./react-action
@@ -161,8 +160,8 @@ jobs:
       with:
         name: react-artifact
         
-    - name: pwd
-      run: ls -al .
+    #- name: pwd
+    #  run: ls -al .
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
@@ -173,4 +172,4 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         source: "./**"
-        target: ${{ secrets.DIST_PATH }}
+        target: ${{ secrets.DIST_PATH_FRONT }}
