@@ -1,6 +1,5 @@
 package com.example.githubaction;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +22,6 @@ public class HelloController {
         return "Hello Controller : CacheTest";
     }
 
-    // spring boot init test
+    // spring boot init test 2
 
 }
