@@ -229,14 +229,16 @@ backend:
 
 ## 실행 결과 사진
 
-#### 서버 Upload 결과
+### 서버 Upload 결과
 ![스크린샷 2023-08-17 223028](https://github.com/PARKJINHOH/github-action/assets/24603994/e2c7aed9-6fd2-4de2-ad8b-a30a0c99bbef)
 ![스크린샷 2023-08-17 223120](https://github.com/PARKJINHOH/github-action/assets/24603994/616bf5e5-22d5-46e0-98a9-3258126fd856)
 
-#### Github Action 실행 결과
-### Backend 만 변경시
+##
+
+### Github Action 실행 결과
+#### Backend 만 변경시
 ![스크린샷 2023-08-17 223147](https://github.com/PARKJINHOH/github-action/assets/24603994/da90214a-718f-49a5-a851-889b8faec0a7)
-### Frontend 만 변경시
+#### Frontend 만 변경시
 ![스크린샷 2023-08-17 223156](https://github.com/PARKJINHOH/github-action/assets/24603994/bcdf8f17-585a-4d99-a4f0-78f85bfd1c77)
 
 
