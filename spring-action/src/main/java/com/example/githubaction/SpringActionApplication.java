@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GithubActionApplication {
+public class SpringActionApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GithubActionApplication.class, args);
+        SpringApplication.run(SpringActionApplication.class, args);
     }
 
 }
