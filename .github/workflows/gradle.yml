@@ -73,11 +73,11 @@ jobs:
         ./gradlew clean bootJar
         ls ./build/libs
         
-    - name: Upload to Oracle Cloud
+    - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
-        path: github-action/build/libs #Full Path
+        path: ${{ env.working-directory }}/build/libs #Full Path
   
   backend-upload:
     needs: backend
@@ -143,3 +143,23 @@ jobs:
       run: |
         cd ${{ env.working-directory }}
         npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: react-artifact
+        path: ${{ env.working-directory }}/build #Full Path
+
+  
+  front-upload:
+    needs: frontend
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: react-artifact
+        
+    - name: pwd
+      run: ls -al .
