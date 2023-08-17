@@ -101,3 +101,36 @@ jobs:
         key: ${{ secrets.SSH_RSA }}
         source: "*.jar"
         target: ${{ secrets.DIST_PATH }}
+
+  frontend:
+    needs: changes
+    # if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./react-action
+
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: develop
+        repository: PARKJINHOH/github-action
+        token: ${{ secrets.TOKEN_GITHUB }}
+
+    - uses: actions/cache@v3
+      id: npm-cache
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          
+    - if: steps.npm-cache.outputs.cache-hit == 'true'
+      run: echo 'npm cache hit!'
+    - if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: echo 'npm cache missed!'
+
+    - name: Install Dependencies
+    - run: npm install
+
+    - name: Build
+      run: npm run build
