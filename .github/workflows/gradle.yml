@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Project CI/CD
 
 on:
   push:
@@ -15,8 +15,6 @@ jobs:
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
       frontend: ${{ steps.filter.outputs.frontend }}
-    env:
-      working-directory: ./github-action
 
     steps:
     - name: checkout
@@ -34,7 +32,28 @@ jobs:
           backend:
             - 'github-action/**'
           frontend:
-           - 'react-action/**'      
+            - 'react-action/**'
+  
+  backend:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./github-action
+
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: develop
+        repository: PARKJINHOH/github-action
+        token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Cache Gradle
       uses: actions/cache@v3
@@ -45,12 +64,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
 
     - name: Gradle wrapper & build
       working-directory: ${{ env.working-directory }}
@@ -59,26 +72,24 @@ jobs:
         ./gradlew clean bootJar
         ls ./build/libs
         
-    - name: Upload to Oracle Cloud
+    - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
-        path: github-action/build/libs #Full Path
-
+        path: ${{ env.working-directory }}/build/libs #Full Path
   
-  backend:
-    needs: changes
-    if: ${{ needs.changes.outputs.backend == 'true' }}
+  backend-upload:
+    needs: backend
     runs-on: ubuntu-latest
 
-    steps:        
+    steps: 
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: jar-artifact
         
-    - name: pwd
-      run: ls -al .
+    #- name: pwd
+    #  run: ls -al .
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
@@ -89,4 +100,76 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         source: "*.jar"
-        target: ${{ secrets.DIST_PATH }}
+        target: ${{ secrets.DIST_PATH_BACKEND }}
+
+  frontend:
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./react-action
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: develop
+        repository: PARKJINHOH/github-action
+        token: ${{ secrets.TOKEN_GITHUB }}
+
+    - uses: actions/cache@v3
+      id: npm-cache
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    - if: steps.npm-cache.outputs.cache-hit == 'true'
+      run: echo 'npm cache hit!'
+    - if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: echo 'npm cache missed!'
+
+    - name: Set up Node Version
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Dependencies
+      run: |
+        cd ${{ env.working-directory }}
+        npm ci
+
+    - name: Build
+      run: |
+        cd ${{ env.working-directory }}
+        npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: react-artifact
+        path: ${{ env.working-directory }}/build #Full Path
+
+  
+  front-upload:
+    needs: frontend
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: react-artifact
+        
+    #- name: pwd
+    #  run: ls -al .
+
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SSH_IP }}
+        username: ubuntu
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        key: ${{ secrets.SSH_RSA }}
+        source: "./**"
+        target: ${{ secrets.DIST_PATH_FRONT }}
