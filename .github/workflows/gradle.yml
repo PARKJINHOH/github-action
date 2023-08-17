@@ -38,7 +38,7 @@ jobs:
   
   backend:
     needs: changes
-    #if: ${{ needs.changes.outputs.backend == 'true' }}
+    # if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -47,6 +47,13 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: develop
+        repository: PARKJINHOH/github-action
+        token: ${{ secrets.TOKEN_GITHUB }}
 
     - name: Cache Gradle
       uses: actions/cache@v3
