@@ -163,3 +163,14 @@ jobs:
         
     - name: pwd
       run: ls -al .
+
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SSH_IP }}
+        username: ubuntu
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        key: ${{ secrets.SSH_RSA }}
+        source: "./**"
+        target: ${{ secrets.DIST_PATH }}
