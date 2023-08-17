@@ -66,8 +66,9 @@ jobs:
         path: github-action/build/libs #Full Path
 
   
-  deploy:
+  backend:
     needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
 
     steps:        
