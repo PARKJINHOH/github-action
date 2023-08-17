@@ -22,6 +22,6 @@ public class HelloController {
         return "Hello Controller : CacheTest";
     }
 
-    // spring boot init test 2
+    // spring boot init test 3
 
 }
