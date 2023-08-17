@@ -184,10 +184,11 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_DEV_HOST }}
+          host: ${{ secrets.SSH_IP }}
+          username: ubuntu
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          username: ${{ secrets.SSH_DEV_USERNAME }}
-          key: ${{ secrets.SSH_DEV_RSA_KEY }}
+          key: ${{ secrets.SSH_RSA }}
           script: |
             cd ${{ secrets.DIST_PATH_FRONT }}
             #./2.deploy.sh
