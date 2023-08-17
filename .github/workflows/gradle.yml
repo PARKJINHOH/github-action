@@ -134,16 +134,12 @@ jobs:
       with:
         node-version: 18
 
-    - name: pwd
-      run: ls -al .
-
     - name: Install Dependencies
       run: |
-        cd react-action
+        cd ${{ env.working-directory }}
         npm ci
 
-    - name: pwd2
-      run: ls -al .
-
     - name: Build
-      run: npm run build
+      run: |
+        cd ${{ env.working-directory }}
+        npm run build
