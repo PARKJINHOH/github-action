@@ -1,4 +1,5 @@
-name: Project CI/CD
+name: Java CI with Gradle
+# https://rhysd.github.io/actionlint/
 
 on:
   push:
@@ -12,6 +13,8 @@ permissions:
 jobs:
   changes:
     runs-on: ubuntu-latest
+    env:  
+      working-directory: ./github-action
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
       frontend: ${{ steps.filter.outputs.frontend }}
@@ -38,8 +41,7 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./github-action
+
 
     steps:
     - name: Set up JDK 17
@@ -100,7 +102,7 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         source: "*.jar"
-        target: ${{ secrets.DIST_PATH_BACKEND }}
+        target: ${{ secrets.DIST_PATH_BACKEND }}/staging
 
   frontend:
     needs: changes
@@ -172,4 +174,20 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         source: "./**"
-        target: ${{ secrets.DIST_PATH_FRONT }}
+        target: ${{ secrets.DIST_PATH_FRONT }}/staging
+
+  front-staging:
+    needs: front-upload
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_DEV_HOST }}
+          port: 22
+          username: ${{ secrets.SSH_DEV_USERNAME }}
+          key: ${{ secrets.SSH_DEV_RSA_KEY }}
+          script: |
+            cd ${{ secrets.DIST_PATH_FRONT }}
+            #./2.deploy.sh
