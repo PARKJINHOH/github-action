@@ -16,7 +16,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-          init test2
+          init test3
         </a>
       </header>
     </div>
