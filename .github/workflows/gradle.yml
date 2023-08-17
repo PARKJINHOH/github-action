@@ -138,12 +138,9 @@ jobs:
       run: ls -al .
 
     - name: Install Dependencies
-      script: |
-      cd react-action
-      npm ci
-
-      # run: npm ci
-
+      run: |
+        cd react-action
+        npm ci
 
     - name: pwd2
       run: ls -al .
