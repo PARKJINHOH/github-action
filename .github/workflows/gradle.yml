@@ -2,14 +2,8 @@ name: Java CI with Gradle
 
 on:
   push:
-    paths:
-     - 'github-action/**'
-     - 'react-action/**'
     branches: [ "develop" ]
   pull_request:
-    paths:
-     - 'github-action/**'
-     - 'react-action/**'
     branches: [ "develop" ]
 
 permissions:
