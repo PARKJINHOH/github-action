@@ -102,10 +102,11 @@ jobs:
     
     - name: web docker build and push
       run: |
-        cd ${{ env.working-directory }}
+        cd github-action/${{ env.working-directory }}
         pwd
-        docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
-        docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
+        ls -al .
+        # docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
+        # docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
 
   frontend:
     needs: changes
