@@ -103,8 +103,9 @@ jobs:
     - name: web docker build and push
       run: |
         cd ${{ env.working-directory }}
-        docker build -t ${{ secrets.DOCKER_REPO_BE }}/second-eyes-web .
-        docker push ${{ secrets.DOCKER_REPO_BE }}/second-eyes-web
+        pwd
+        docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
+        docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
 
   frontend:
     needs: changes
