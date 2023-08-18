@@ -84,11 +84,10 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }} # https://docs.docker.com/docker-hub/access-tokens
     
     - name: web docker build and push
+      working-directory: ${{ env.working-directory }}
       run: |
         pwd
-        cd ..
         ls -al .
-        pwd
         docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
         docker push ${{ secrets.DOCKER_REPO }}/gitaction-be        
 
