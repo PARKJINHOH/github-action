@@ -40,7 +40,7 @@ jobs:
     #if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
     env:  
-      working-directory: ./spring-action2
+      working-directory: ./spring-action
 
     steps:
     - name: Set up JDK 17
@@ -72,11 +72,6 @@ jobs:
         chmod +x ./gradlew
         ./gradlew clean bootJar
         ls ./build/libs
-
-    - name: pwd
-      run: | 
-        ls -al .
-        pwd
         
     - name: Upload artifact
       uses: actions/upload-artifact@v3
