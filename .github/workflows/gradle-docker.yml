@@ -90,7 +90,9 @@ jobs:
         name: jar-artifact
         
     - name: pwd
-      run: ls -al .
+      run: | 
+        ls -al .
+        pwd
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
@@ -100,8 +102,9 @@ jobs:
     
     - name: web docker build and push
       run: |
-        docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
-        docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
+        cd ${{ env.working-directory }}
+        docker build -t ${{ secrets.DOCKER_REPO_BE }}/second-eyes-web .
+        docker push ${{ secrets.DOCKER_REPO_BE }}/second-eyes-web
 
   frontend:
     needs: changes
