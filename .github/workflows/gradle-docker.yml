@@ -40,7 +40,7 @@ jobs:
     #if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
     env:  
-      working-directory: ./spring-action
+      working-directory: ./spring-action2
 
     steps:
     - name: Set up JDK 17
