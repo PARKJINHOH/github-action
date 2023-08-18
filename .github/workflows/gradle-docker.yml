@@ -104,7 +104,7 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         script: |
-          docker pull ${{ secrets.DOCKER_REPO }}/gitaction-be
+          sudo docker pull ${{ secrets.DOCKER_REPO }}/gitaction-be
 
   frontend:
     needs: changes
