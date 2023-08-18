@@ -72,6 +72,11 @@ jobs:
         chmod +x ./gradlew
         ./gradlew clean bootJar
         ls ./build/libs
+
+    - name: pwd
+      run: | 
+        ls -al .
+        pwd
         
     - name: Upload artifact
       uses: actions/upload-artifact@v3
