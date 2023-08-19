@@ -86,9 +86,9 @@ jobs:
         pwd
         ls -al .
         # The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested 에러시 아래 사용.
-        # docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
-        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-be ${{ env.working-directory-be }}/ .
-        docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
+        # docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be .
+        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be ${{ env.working-directory-be }}/ .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be
         
   backend-docker:
     needs: backend
@@ -104,7 +104,7 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         script: |
-          sudo docker pull ${{ secrets.DOCKER_REPO }}/gitaction-be
+          sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be
 
   frontend:
     needs: changes
@@ -146,5 +146,5 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-fe:latest .
-        docker push ${{ secrets.DOCKER_REPO }}/gitaction-fe
+        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
