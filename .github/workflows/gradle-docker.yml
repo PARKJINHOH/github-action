@@ -109,9 +109,6 @@ jobs:
     needs: changes
     #if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-22.04
-    defaults:
-        run:
-            working-directory: ${{ env.working-directory-fe }}
 
     steps:
     - name: checkout
