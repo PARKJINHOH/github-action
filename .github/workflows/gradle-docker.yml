@@ -86,7 +86,7 @@ jobs:
         ls -al .
         # The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested 에러시 아래 사용.
         # docker build -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
-        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-be ./backend
+        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-be -f Dockerfile.be .
         docker push ${{ secrets.DOCKER_REPO }}/gitaction-be
         
   backend-docker:
@@ -142,5 +142,5 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-fe ./frontend
+        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-fe -f Dockerfile.fe .
         docker push ${{ secrets.DOCKER_REPO }}/gitaction-fe
