@@ -146,5 +146,5 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/${{ env.docker-image-fe }} .
-        docker push ${{ secrets.DOCKER_REPO }}/${{ env.docker-image-fe }}
+        docker build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-be .
+        docker push ${{ secrets.DOCKER_REPO }}/gitaction-be .
