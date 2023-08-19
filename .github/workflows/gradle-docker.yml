@@ -87,7 +87,7 @@ jobs:
         ls -al .
         # The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested 에러시 아래 사용.
         # docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be .
-        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be ${{ env.working-directory-be }}/ .
+        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be .
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-be
         
   backend-docker:
@@ -110,9 +110,6 @@ jobs:
     needs: changes
     #if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-          working-directory: ${{ env.working-directory-fe }}
 
     steps:
     - name: checkout
@@ -143,6 +140,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: web docker build and push
+      working-directory: ${{ env.working-directory-fe }}
       run: |
         pwd
         ls -al .
