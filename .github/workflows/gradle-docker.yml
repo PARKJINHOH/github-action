@@ -104,8 +104,6 @@ jobs:
         port: 22
         key: ${{ secrets.SSH_RSA }}
         script: |
-          # 기존 이미지 삭제 후 pull
-          sudo docker rmi ${{ secrets.DOCKER_REPO }}/gitaction-be:latest
           sudo docker pull ${{ secrets.DOCKER_REPO }}/gitaction-be
 
   frontend:
