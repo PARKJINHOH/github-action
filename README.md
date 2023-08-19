@@ -70,6 +70,15 @@ on:
     branches: [ "develop" ]
 ```
 
+### (추가) env 설정은 전역적으로 사용이 가능합니다.
+```
+env:  
+  working-directory-be: ./spring-action
+  working-directory-fe: ./react-action
+```
+job안에 env설정은 다른 job에서는 사용할 수 없습니다.
+경로같은 경우 전역적으로 사용할 수 있도록 job 밖에 빼서 선언이 가능합니다.
+
 ##
 
 ### changes job에서는 변경을 감지합니다.
