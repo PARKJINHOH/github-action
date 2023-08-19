@@ -81,7 +81,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }} # https://docs.docker.com/docker-hub/access-tokens
     
     - name: web docker build and push
-      working-directory: ${{ env.working-directory-be }}
       run: |
         pwd
         ls -al .
