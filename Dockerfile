@@ -1,3 +1,4 @@
+frontend/Dockerfile
 FROM node:18-alpine AS build
 
 WORKDIR /app
@@ -8,7 +9,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-################################################
+
 FROM nginx:1.25-alpine
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
@@ -20,3 +21,11 @@ EXPOSE 80
 
 # nginx 실행
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+################################################
+
+backend/Dockerfile
+FROM eclipse-temurin:17.0.8_7-jre-jammy
+ARG JAR_FILE=/build/libs/spring-action-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} /ROOT.jar
+ENTRYPOINT ["java","-jar","/ROOT.jar"]
