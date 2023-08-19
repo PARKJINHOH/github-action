@@ -145,4 +145,7 @@ jobs:
         pwd
         ls -al .
         docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
+        docker images
+        docker tag gitaction-fe:latest ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe:latest
+        docker images
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
