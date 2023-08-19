@@ -147,10 +147,9 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker buildx build --platform linux/arm64 --tag ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
-        docker images
+        docker buildx build --platform linux/arm64 --tag ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe . --push
                 
-    - name: web docker push
-      run: |
-        docker images
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
+    # - name: web docker push
+    #   run: |
+    #     docker images
+    #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
