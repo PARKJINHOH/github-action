@@ -129,6 +129,9 @@ jobs:
       run: echo 'npm cache hit!'
     - if: steps.npm-cache.outputs.cache-hit != 'true'
       run: echo 'npm cache missed!'
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2      
         
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2        
@@ -144,7 +147,7 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
+        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
         docker images
                 
     - name: web docker push
