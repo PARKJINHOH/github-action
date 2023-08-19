@@ -150,7 +150,7 @@ jobs:
         docker buildx build --platform linux/arm64 --tag ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
         docker images
                 
-    # - name: web docker push
-    #   run: |
-    #     docker images
-    #     docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
+    - name: web docker push
+      run: |
+        docker images
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
