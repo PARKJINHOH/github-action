@@ -144,10 +144,10 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
+        docker build --platform linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe .
+        docker images
                 
     - name: web docker push
       run: |
-        pwd
-        ls -al .
+        docker images
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/gitaction-fe
