@@ -146,5 +146,5 @@ jobs:
       run: |
         pwd
         ls -al .
-        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-fe .
+        docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_REPO }}/gitaction-fe:latest .
         docker push ${{ secrets.DOCKER_REPO }}/gitaction-fe
